@@ -1,0 +1,254 @@
+
+
+
+{% extends 'loja/base.html' %}
+{% load static %}
+{% block extra_css %}
+
+    <link rel="stylesheet" href="{% static 'loja/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'loja/css/catalogo.css' %}">
+{% endblock %}
+
+<!-- Link para o CSS do cabeçalho -->
+<link rel="stylesheet" href="{% static 'loja/css/header.css' %}">
+
+
+{% block content %}
+    <!-- O resto do seu código da página de detalhe começa aqui -->
+
+
+<style>
+    /* CSS DA PÁGINA DE PRODUTO */
+    .produto-wrapper {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Duas colunas iguais */
+        gap: 40px;
+    }
+
+    /* Coluna Esquerda: Fotos */
+    .galeria-fotos {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .foto-principal {
+        width: 100%;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #eee;
+    }
+    
+    .foto-principal img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* Se você tiver mais fotos depois, elas aparecerão aqui */
+    .miniaturas {
+        display: flex;
+        gap: 10px;
+    }
+    .miniatura {
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
+        cursor: pointer;
+        object-fit: cover;
+        opacity: 0.7;
+        transition: 0.2s;
+    }
+    .miniatura:hover { opacity: 1; border: 2px solid #ff2d6f; }
+
+    /* Coluna Direita: Informações */
+    .info-produto {
+        padding: 10px 0;
+    }
+
+    .prod-categoria {
+        font-size: 14px;
+        color: #888;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .prod-titulo {
+        font-size: 32px;
+        font-weight: 800;
+        color: #111;
+        margin: 0 0 15px;
+        line-height: 1.2;
+    }
+
+    .prod-preco {
+        font-size: 28px;
+        color: #ff2d6f;
+        font-weight: 700;
+        margin-bottom: 25px;
+    }
+
+    .prod-descricao {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #555;
+        margin-bottom: 30px;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        padding: 20px 0;
+    }
+
+    .botoes-acao {
+        display: flex;
+        gap: 15px;
+    }
+
+    .btn-grandao {
+        flex: 1;
+        padding: 15px;
+        text-align: center;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 16px;
+        text-decoration: none;
+        transition: 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        cursor: pointer;
+        border: none;
+    }
+
+    .btn-sacola {
+        background: #f0f0f0;
+        color: #333;
+    }
+    .btn-sacola:hover { background: #e0e0e0; }
+
+    .btn-compra {
+        background: #111;
+        color: #fff;
+    }
+    .btn-compra:hover { background: #ff2d6f; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,45,111,0.3); }
+
+    /* Responsivo para celular */
+    @media (max-width: 768px) {
+        .produto-wrapper { grid-template-columns: 1fr; }
+    }
+</style>
+
+<div class="produto-wrapper">
+    
+    <!-- LADO ESQUERDO: FOTOS -->
+    <div class="galeria-fotos">
+        <div class="foto-principal">
+            {% if produto.imagem %}
+                <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">
+            {% else %}
+                <div style="padding:50px; text-align:center; background:#eee;">Sem Foto</div>
+            {% endif %}
+        </div>
+        
+        <!-- Espaço para miniaturas (se você criar um model de fotos extras depois) -->
+        <div class="miniaturas">
+            <!-- Exemplo estático: -->
+            <!-- <img src="..." class="miniatura"> -->
+        </div>
+    </div>
+
+    <!-- LADO DIREITO: TEXTOS -->
+    <div class="info-produto">
+        <div class="prod-categoria">{{ produto.categoria.nome }}</div>
+        <h1 class="prod-titulo">{{ produto.nome }}</h1>
+        <div class="prod-preco">R$ {{ produto.preco }}</div>
+        <div class="botoes-acao">
+            <!-- Botão Adicionar ao Carrinho -->
+            <form action="{% url 'carrinho_adicionar' produto.id %}" method="post" style="flex:1; display:flex;">
+                {% csrf_token %}
+                <button type="submit" class="btn-grandao btn-sacola">
+                    Adicionar ao Carrinho
+                </button>
+            </form>
+
+            <!-- Botão Comprar (WhatsApp) -->
+            <a href="https://wa.me/5593992434424?text=Olá! Quero comprar: {{ p.nome }} (R$ {{ p.preco }})" target="_blank" class="btn-grandao btn-compra">
+                Comprar Agora
+            </a>
+        </div>
+
+        <div class="prod-descricao">
+            <!-- Usa linebreaks para manter os parágrafos do texto -->
+            {{ produto.descricao|linebreaks }}
+        </div>
+
+        
+    </div>
+</div>
+
+<!-- CATÁLOGO ABAIXO DO DETALHE (PRODUTOS RELACIONADOS) -->
+{% if relacionados %}
+<div class="catalogo-wrapper" style="margin-top: 60px;">
+    
+    <h2 class="titulo-sessao">Você também pode gostar</h2>
+
+    <div class="grid-produtos">
+        {% for p in relacionados %}
+            <div class="card-produto">
+                <!-- Imagem com link -->
+                <div class="card-img-wrapper">
+                    <a href="{% url 'produto_detalhe' p.id %}" style="display:block; width:100%; height:100%;">
+                        {% if p.imagem %}
+                            <img src="{{ p.imagem.url }}" alt="{{ p.nome }}">
+                        {% else %}
+                            <span style="color:#ccc;">Sem Foto</span>
+                        {% endif %}
+                    </a>
+                </div>
+
+                <!-- Conteúdo -->
+                <div class="card-content">
+                    <div class="card-category">{{ p.categoria.nome }}</div>
+
+                    <h3 class="card-title">
+                        <a href="{% url 'produto_detalhe' p.id %}" style="text-decoration:none; color:inherit;">
+                            {{ p.nome }}
+                        </a>
+                    </h3>
+
+                    <div class="card-price-row">
+                        <span class="card-price">R$ {{ p.preco }}</span>
+                    </div>
+
+                    <div class="card-actions">
+                        <!-- Adicionar ao carrinho -->
+                        <form action="{% url 'carrinho_adicionar' produto.id %}" method="post" style="flex:1; display:flex;">
+                            {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <button type="submit" class="btn-grandao btn-sacola">
+                             Adicionar à Sacola
+                         </button>
+                        </form>
+
+
+                        <!-- Comprar via WhatsApp -->
+                        <a href="https://wa.me/5593992434424?text=Olá! Gostei do produto: {{ p.nome }} (R$ {{ p.preco }})" 
+                           class="btn-action btn-buy" target="_blank">
+                           Comprar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endif %}
+
+
+
+{% endblock %}

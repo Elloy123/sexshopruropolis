@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sexy Shop Rurópolis</title>
+
+    <!-- Importa todos os CSS globais -->
+   <link rel="stylesheet" href="{% static 'loja/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'loja/css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'loja/css/home.css' %}">
+
+    
+    <!-- Bloco para CSS específico de cada página (opcional) -->
+    {% block extra_css %}{% endblock %}
+</head>
+<body style="background: #ffffff;
+background: linear-gradient(179deg,rgba(255, 255, 255, 1) 0%, rgb(255, 188, 243) 100%);">
+
+    <!-- CABEÇALHO (Aparece em todas as páginas) -->
+    <header style="background: radial-gradient(circle,rgba(139, 21, 56, 1) 0%, rgba(230, 73, 124, 1) 88%, rgba(252, 70, 107, 1) 100%);;margin: 0;">
+      <div class="container topbar">
+        <div class="brand-left"></div>
+        <div class="brand">
+          <div class="logo">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'loja/img/logo.jpeg.jpeg' %}" alt="Sexy Shop Rurópolis">
+            </a>
+          </div>
+          <h1 class="brand-title" style="color: #000000;">Sexy Shop Rurópolis</h1>
+        </div>
+        <div class="brand-right" >
+          <a class="cart-link" href="/carrinho/" style="background-color:#5f2d36;">
+            🛒 Carrinho <span style="background-color: #000000;color: #fdfdfd;" class="cart-badge">{{ carrinho_qtd|default:"0" }}</span>
+          </a>
+        </div>
+      </div>
+    </header>
+   <!-- BARRA DE CATEGORIAS (FIXA EM TODAS AS PÁGINAS) -->
+<style>
+    /* CSS para efeitos de interação nos botões de categoria */
+    .botao-cat {
+        transition: all 0.3s ease;
+    }
+    .botao-cat:hover {
+        background-color: #ff2d6f !important; /* Rosa Sexy Shop */
+        color: #030303 !important;
+        border-color: #ff2d6f !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+  
+</style>
+
+<div class="section-categorias-wrapper">
+    <div class="container-cats-center" style="max-width:1100px; text-align:center;">
+        
+        <!-- Lista de Botões -->
+        <div class="lista-botoes-cats" style="display:flex; justify-content:center; ">
+            
+            <!-- Botão "Todas" -->
+            <a class="botao-cat" href="/" 
+               style="display:inline-block; padding:10px 20px; border-radius:50px; background:#c72858; text-decoration:none; color:#000000; font-size:14px; font-weight:600; border:1px solid #000000; box-shadow:0 2px 5px rgba(0,0,0,0.05);">
+                Todas
+            </a>
+            
+            <!-- Loop das Categorias -->
+            {% for c in categorias_globais %}
+                <a class="botao-cat" href="/?cat={{ c.slug }}" 
+                   style="display:inline-block; padding:10px 20px; border-radius:50px; background:#c72858; text-decoration:none; color:#000000; font-size:14px; font-weight:600; border:1px solid #020202; box-shadow:0 2px 5px rgba(0,0,0,0.05);">
+                    {{ c.nome }}
+                </a>
+            {% endfor %}
+            
+        </div>
+
+    </div>
+</div>
+
+    <div id="mensagens-flutuantes" style="position: fixed; top: 16px; right: 16px; z-index: 9999; max-width: 320px;">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="msg-alerta {{ message.tags }}" 
+                     style="background:#d4edda; color:#030303; border:1px solid #c3e6cb; 
+                            padding:10px 12px; border-radius:8px; margin-bottom:8px; 
+                            font-size:13px; box-shadow:0 4px 10px rgba(0,0,0,0.12); display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:16px;">
+                        {% if message.tags == 'success' %}✅{% elif message.tags == 'error' %}⚠️{% else %}ℹ️{% endif %}
+                    </span>
+                    <span style="flex:1;">{{ message }}</span>
+                    <button class="fechar-msg" style="background:none; border:none; color:inherit; cursor:pointer; font-weight:bold;">×</button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <script>
+  // Fecha ao clicar no X
+  document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('fechar-msg')) {
+          const box = e.target.closest('.msg-alerta');
+          if (box) box.remove();
+      }
+  });
+
+  // Some automaticamente depois de 4 segundos
+  window.addEventListener('load', function() {
+      const msgs = document.querySelectorAll('.msg-alerta');
+      msgs.forEach(function(box) {
+          setTimeout(function() {
+              if (!box) return;
+              box.style.transition = 'opacity 0.4s, transform 0.4s';
+              box.style.opacity = '0';
+              box.style.transform = 'translateY(-6px)';
+              setTimeout(function() {
+                  if (box && box.parentNode) {
+                      box.parentNode.removeChild(box);
+                  }
+              }, 400);
+          }, 4000); // 4000 ms = 4 segundos
+      });
+  });
+</script>
+
+    <!-- CONTEÚDO DA PÁGINA (Isso muda em cada página) -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+     <!-- HERO BANNER -->
+   
+
+
+    
+    <footer style="text-align:center; background: radial-gradient(circle,rgba(139, 21, 56, 1) 0%, rgba(230, 73, 124, 1) 88%, rgba(252, 70, 107, 1) 100%);margin: 0; padding: 20px; margin-top:2px; border-top:1px solid #eee;">
+        &copy; 2025 Sexy Shop Rurópolis - Todos os direitos reservados.
+    </footer>
+
+</body>
+</html>
