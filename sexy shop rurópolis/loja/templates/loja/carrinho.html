@@ -1,78 +1,75 @@
 {% extends 'loja/base.html' %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'loja/css/carrinho.css' %}">
+{% endblock %}
+
 {% block content %}
 
-<div style="max-width: 1100px; margin: 40px auto; padding: 0 20px;">
-    
-    <h1 style="margin-bottom: 30px; font-weight:800; color:#111;">Seu Carrinho</h1>
+<div class="carrinho-container">
+    <h1 class="carrinho-titulo">Seu Carrinho</h1>
 
     {% if not itens %}
-        <div style="text-align:center; padding:60px 20px; background:#fff; border:1px dashed #ddd; border-radius:12px;">
-            <p style="font-size:18px; color:#666; margin-bottom:20px;">Seu carrinho está vazio.</p>
-            <a href="/" style="display:inline-block; padding:12px 25px; background:#ff2d6f; color:#000000; text-decoration:none; border-radius:50px; font-weight:700;">
+        <div class="carrinho-vazio">
+            <p>Seu carrinho está vazio.</p>
+            <a href="/" class="btn-voltar-compras">
                 Voltar às Compras
             </a>
         </div>
     {% else %}
 
         <!-- LAYOUT EM 2 COLUNAS -->
-        <div style="display:grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr); gap:24px; align-items:flex-start;">
-            
+        <div class="carrinho-layout">
             <!-- COLUNA ESQUERDA: ITENS DO CARRINHO -->
             <div>
-                <div style="background:#fff; border-radius:12px; border:1px solid #eee; overflow:hidden;">
-                    <table style="width:100%; border-collapse:collapse;">
+                <div class="itens-carrinho">
+                    <table class="carrinho-table">
                         <thead>
-                            <tr style="background:#f9f9f9; text-align:left;">
-                                <th style="padding:15px; font-size:14px; color:#555;">Produto</th>
-                                <th style="padding:15px; font-size:14px; color:#555;">Qtd</th>
-                                <th style="padding:15px; font-size:14px; color:#555;">Preço</th>
-                                <th style="padding:15px; font-size:14px; color:#555;">Subtotal</th>
-                                <th style="padding:15px; font-size:14px; color:#555;"></th>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Qtd</th>
+                                <th>Preço</th>
+                                <th>Subtotal</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for item in itens %}
-                            <tr style="border-top:1px solid #eee;">
-                                <td style="padding:15px;">
-                                    <div style="display:flex; align-items:center; gap:15px;">
+                            <tr>
+                                <td>
+                                    <div class="produto-item">
                                         {% if item.produto.imagem %}
-                                            <img src="{{ item.produto.imagem.url }}" style="width:60px; height:60px; object-fit:cover; border-radius:8px;">
+                                            <img src="{{ item.produto.imagem.url }}" class="produto-img" alt="{{ item.produto.nome }}">
                                         {% else %}
-                                            <div style="width:60px; height:60px; background:#eee; border-radius:8px;"></div>
+                                            <div class="produto-img-placeholder"></div>
                                         {% endif %}
                                         <div>
-                                            <div style="font-weight:700; color:#111;">{{ item.produto.nome }}</div>
-                                            <div style="font-size:12px; color:#888;">{{ item.produto.categoria.nome }}</div>
+                                            <div class="produto-info-nome">{{ item.produto.nome }}</div>
+                                            <div class="produto-info-categoria">{{ item.produto.categoria.nome }}</div>
                                         </div>
                                     </div>
                                 </td>
-<td style="padding:15px;text-align:center;">
-    <form action="{% url 'carrinho_atualizar' item.produto.id %}" method="post" style="display:flex;align-items:center;justify-content:center;gap:4px;">
-        {% csrf_token %}
-        <button type="submit" name="qtd" value="{% if item.qtd > 1 %}{{ item.qtd|add:'-1' }}{% else %}0{% endif %}" 
-                style="width:32px;height:32px;border:none;background:#ff4444;color:white;border-radius:50%;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,0.1);"
-                {% if item.qtd == 1 %}onclick="return confirm('Remover este item?');"{% endif %}>
-            -
-        </button>
-        <span style="min-width:25px;text-align:center;font-weight:700;font-size:15px;color:#333;">{{ item.qtd }}</span>
-        <button type="submit" name="qtd" value="{{ item.qtd|add:'1' }}" 
-                style="width:32px;height:32px;border:none;background:#25D366;color:white;border-radius:50%;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,0.1);">
-            +
-        </button>
-    </form>
-</td>
+                                <td style="text-align:center;">
+                                    <form action="{% url 'carrinho_atualizar' item.produto.id %}" method="post" class="qtd-controls">
+                                        {% csrf_token %}
+                                        <button type="submit" name="qtd" value="{% if item.qtd > 1 %}{{ item.qtd|add:'-1' }}{% else %}0{% endif %}"
+                                                class="qtd-btn qtd-btn-minus"
+                                                {% if item.qtd == 1 %}onclick="return confirm('Remover este item?');"{% endif %}>
+                                            -
+                                        </button>
+                                        <span class="qtd-valor">{{ item.qtd }}</span>
+                                        <button type="submit" name="qtd" value="{{ item.qtd|add:'1' }}"
+                                                class="qtd-btn qtd-btn-plus">
+                                            +
+                                        </button>
+                                    </form>
+                                </td>
 
-
-
-
-
-
-                                <td style="padding:15px;">R$ {{ item.preco }}</td>
-                                <td style="padding:15px; font-weight:700; color:#ff2d6f;">R$ {{ item.subtotal }}</td>
-                                <td style="padding:15px; text-align:right;">
-                                    <a href="{% url 'carrinho_remover' item.produto.id %}" style="color:#dc3545; text-decoration:none; font-size:13px; font-weight:600;">
+                                <td>R$ {{ item.preco }}</td>
+                                <td class="preco-subtotal">R$ {{ item.subtotal }}</td>
+                                <td style="text-align:right;">
+                                    <a href="{% url 'carrinho_remover' item.produto.id %}" class="link-remover">
                                         Remover
                                     </a>
                                 </td>
@@ -82,103 +79,97 @@
                     </table>
                 </div>
 
-                <!-- Total e link de limpar (fica embaixo da tabela, na coluna esquerda) -->
-                <div style="margin-top:15px; display:flex; justify-content:space-between; align-items:center;">
-                    <div style="font-size:18px; font-weight:700; color:#111;">
-                        Total: <span style="color:#ff2d6f;">R$ {{ total }}</span>
+                <!-- Total e link de limpar -->
+                <div class="carrinho-footer">
+                    <div class="total-carrinho">
+                        Total: <span class="total-valor">R$ {{ total }}</span>
                     </div>
-                    <a href="{% url 'carrinho_limpar' %}" style="font-size:13px; color:#888; text-decoration:underline;">
+                    <a href="{% url 'carrinho_limpar' %}" class="link-limpar">
                         Esvaziar Carrinho
                     </a>
                 </div>
             </div>
 
-                        <!-- COLUNA DIREITA: DADOS DO CLIENTE E FINALIZAÇÃO -->
+            <!-- COLUNA DIREITA: DADOS DO CLIENTE E FINALIZAÇÃO -->
             <div>
-                <div style="background:#fff; padding:20px 18px 22px; border-radius:12px; border:1px solid #eee;">
-                    <h2 style="margin:0 0 14px; font-size:18px; font-weight:800; color:#111;">Dados e Finalização</h2>
-                    <p style="margin:0 0 18px; font-size:13px; color:#777;">
+                <div class="finalizacao-sidebar">
+                    <h2 class="finalizacao-titulo">Dados e Finalização</h2>
+                    <p class="finalizacao-descricao">
                         Preencha seus dados, escolha retirada ou entrega e clique em <strong>Enviar pedido no WhatsApp</strong>.
                     </p>
 
                     <!-- OPÇÕES DE ENTREGA / RETIRADA -->
-                    <div style="margin-bottom:16px; padding:10px 12px; border-radius:8px; border:1px solid #f0f0f0; background:#fafafa;">
-                        <p style="margin:0 0 8px; font-size:13px; font-weight:700;">Opção de recebimento</p>
+                    <div class="opcoes-entrega">
+                        <p class="opcoes-titulo">Opção de recebimento</p>
 
-                        <label style="display:flex; align-items:center; gap:8px; font-size:13px; margin-bottom:4px; cursor:pointer;">
+                        <label class="opcao-label">
                             <input type="radio" name="tipo_entrega" value="retirada" checked onclick="atualizarResumoTotal()">
                             <span>Retirada no local <strong>(-10% de desconto)</strong></span>
                         </label>
 
-                        <label style="display:flex; align-items:center; gap:8px; font-size:13px; cursor:pointer;">
+                        <label class="opcao-label">
                             <input type="radio" name="tipo_entrega" value="entrega" onclick="atualizarResumoTotal()">
                             <span>Entrega em domicílio <strong>(grátis a partir de R$ 30,00; abaixo disso, taxa de R$ 5,00)</strong></span>
                         </label>
                     </div>
 
                     <!-- RESUMO DOS VALORES -->
-                    <div style="margin-bottom:18px; padding:10px 12px; border-radius:8px; border:1px solid #f0f0f0; background:#fcfcfc; font-size:13px;">
-                        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                    <div class="resumo-valores">
+                        <div class="resumo-linha">
                             <span>Subtotal</span>
                             <span>R$ <span id="subtotal_valor">{{ total }}</span></span>
                         </div>
-                        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                        <div class="resumo-linha">
                             <span>Desconto</span>
                             <span>- R$ <span id="desconto_valor">0,00</span></span>
                         </div>
-                        <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                        <div class="resumo-linha">
                             <span>Taxa de entrega</span>
                             <span>R$ <span id="taxa_valor">0,00</span></span>
                         </div>
-                        <hr style="border:none; border-top:1px solid #eee; margin:8px 0;">
-                        <div style="display:flex; justify-content:space-between; font-weight:800; font-size:15px;">
+                        <hr class="resumo-separador">
+                        <div class="resumo-linha resumo-total">
                             <span>Total final</span>
                             <span>R$ <span id="total_final_valor">{{ total }}</span></span>
                         </div>
                     </div>
 
                     <!-- FORMULÁRIO DE DADOS -->
-                    <form id="form-dados-cliente" onsubmit="enviarPedidoWhatsapp(event)">
-                        <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
-                            <div style="text-align:left;">
-                                <label style="display:block; font-size:13px; margin-bottom:4px;">Nome completo</label>
-                                <input type="text" id="nome_cliente" required
-                                       style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #ddd; font-size:14px;">
-                            </div>
-                            <div style="text-align:left;">
-                                <label style="display:block; font-size:13px; margin-bottom:4px;">Endereço completo</label>
-                                <textarea id="endereco_cliente" rows="3" 
-                                          style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #ddd; font-size:14px; resize:vertical;"></textarea>
-                            </div>
-                            <div style="text-align:left;">
-                                <label style="display:block; font-size:13px; margin-bottom:4px;">Forma de pagamento</label>
-                                <select id="forma_pagamento" required
-                                        style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #ddd; font-size:14px;">
-                                    <option value="">Selecione</option>
-                                    <option>Pix</option>
-                                    <option>Cartão de crédito</option>
-                                    <option>Cartão de débito</option>
-                                    <option>Dinheiro</option>
-                                </select>
-                            </div>
-                            <div style="text-align:left;">
-                                <label style="display:block; font-size:13px; margin-bottom:4px;">Observações (opcional)</label>
-                                <textarea id="observacoes_cliente" rows="2"
-                                          style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #ddd; font-size:14px; resize:vertical;"></textarea>
-                            </div>
+                    <form id="form-dados-cliente" onsubmit="enviarPedidoWhatsapp(event)" class="form-dados">
+                        <div class="form-grupo">
+                            <label>Nome completo</label>
+                            <input type="text" id="nome_cliente" required class="form-input">
+                        </div>
+                        <div class="form-grupo">
+                            <label>Endereço completo</label>
+                            <textarea id="endereco_cliente" rows="3" class="form-input form-textarea"></textarea>
+                        </div>
+                        <div class="form-grupo">
+                            <label>Forma de pagamento</label>
+                            <select id="forma_pagamento" required class="form-input">
+                                <option value="">Selecione</option>
+                                <option>Pix</option>
+                                <option>Cartão de crédito</option>
+                                <option>Cartão de débito</option>
+                                <option>Dinheiro</option>
+                            </select>
+                        </div>
+                        <div class="form-grupo">
+                            <label>Observações (opcional)</label>
+                            <textarea id="observacoes_cliente" rows="2" class="form-input form-textarea"></textarea>
                         </div>
 
-                        <button type="submit"
-                                style="display:block; width:100%; text-align:center; padding:12px; background:#25D366; color:#fff; text-decoration:none; font-weight:700; border-radius:50px; border:none; cursor:pointer; margin-bottom:6px;">
+                        <button type="submit" class="btn-whatsapp">
                             Enviar pedido no WhatsApp
                         </button>
 
-                        <small style="display:block; font-size:11px; color:#999; text-align:center;">
+                        <small class="info-pequena">
                             O valor final considera desconto/taxa conforme a opção de recebimento.
                         </small>
                     </form>
                 </div>
             </div>
+        </div>
 
     {% endif %}
 

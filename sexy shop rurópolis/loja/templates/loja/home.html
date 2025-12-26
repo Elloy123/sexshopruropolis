@@ -10,32 +10,26 @@
 {% block content %}
    
     <div class="hero-wrap">
-        <div class="hero" style="background: radial-gradient(circle,rgba(139, 21, 56, 1) 0%, rgba(230, 73, 124, 1) 88%, rgba(252, 70, 107, 1) 100%);" >
-            
-            <h2 class="hero-title" style="color: #000; text-shadow: 2px 2px 8px rgba(247, 240, 242, 0.3);">Seleção exclusiva de produtos para seu prazer e bem-estar</h2>
-            <p class="hero-subtitle" style="color: #000; text-shadow: 2px 2px 8px rgba(247, 240, 242, 0.3);">Qualidade, discrição e satisfação garantidas em cada compra.</p>
-            
-           
+        <div class="hero">
+            <h2 class="hero-title">Seleção exclusiva de produtos para seu prazer e bem-estar</h2>
+            <p class="hero-subtitle">Qualidade, discrição e satisfação garantidas em cada compra.</p>
         </div>
     </div>
 
     
     <!-- CATÁLOGO DE PRODUTOS -->
     <div class="catalogo-wrapper" id="catalogo">
-      <!-- BOTÕES DE FILTRO -->
-<div class="catalogo-wrapper" id="catalogo">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px;">
-        <h2 class="titulo-sessao">
-            {% if categoria_ativa %}
-                {{ categoria_ativa.nome }}
-            {% else %}
-                Novidades
-            {% endif %}
-        </h2>
-      
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px;">
+            <h2 class="titulo-sessao">
+                {% if categoria_ativa %}
+                    {{ categoria_ativa.nome }}
+                {% else %}
+                    Novidades
+                {% endif %}
+            </h2>
 
-        <div class="filtros-container">
-            <span style="font-weight:600; margin-right:15px; color:#666;">Ordenar por:</span>
+            <div class="filtros-container">
+                <span style="font-weight:600; margin-right:15px; color:#666;">Ordenar por:</span>
             
             <!-- Link Padrão -->
             <a href="{% url 'home' %}{% if categoria_ativa %}?cat={{ categoria_ativa.slug }}{% endif %}" 
@@ -123,8 +117,8 @@
                 {% endfor %}
             </div>
             
-            <!-- SEÇÃO DE DIFERENCIAIS (Só aparece aqui na Home) -->  
-    <div class="diferenciais-section" style="margin: 5px;">
+            <!-- SEÇÃO DE DIFERENCIAIS (Só aparece aqui na Home) -->
+    <div class="diferenciais-section">
         <div class="diferenciais-container">
             <div class="diferencial-card">
                 <div class="diferencial-icon">📦</div>
