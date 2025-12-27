@@ -62,7 +62,7 @@
                     <span class="msg-icon">
                         {% if message.tags == 'success' %}✅{% elif message.tags == 'error' %}⚠️{% else %}ℹ️{% endif %}
                     </span>
-                    <span style="flex:1;">{{ message }}</span>
+                    <span class="msg-texto">{{ message }}</span>
                     <button class="fechar-msg">×</button>
                 </div>
             {% endfor %}

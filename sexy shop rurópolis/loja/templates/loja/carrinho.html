@@ -50,7 +50,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td style="text-align:center;">
+                                <td class="td-center">
                                     <form action="{% url 'carrinho_atualizar' item.produto.id %}" method="post" class="qtd-controls">
                                         {% csrf_token %}
                                         <button type="submit" name="qtd" value="{% if item.qtd > 1 %}{{ item.qtd|add:'-1' }}{% else %}0{% endif %}"
@@ -68,7 +68,7 @@
 
                                 <td>R$ {{ item.preco }}</td>
                                 <td class="preco-subtotal">R$ {{ item.subtotal }}</td>
-                                <td style="text-align:right;">
+                                <td class="td-right">
                                     <a href="{% url 'carrinho_remover' item.produto.id %}" class="link-remover">
                                         Remover
                                     </a>
