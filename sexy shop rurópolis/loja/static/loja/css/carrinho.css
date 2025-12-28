@@ -99,6 +99,14 @@
     padding: 18px 15px;
 }
 
+.td-center {
+    text-align: center;
+}
+
+.td-right {
+    text-align: right;
+}
+
 /* Produto Item */
 .produto-item {
     display: flex;

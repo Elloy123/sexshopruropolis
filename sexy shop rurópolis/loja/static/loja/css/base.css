@@ -1,9 +1,9 @@
 /* ============================================
-   SEXY SHOP RUR�POLIS - BASE CSS
-   Estilos globais e reset
+   SEXY SHOP RURÓPOLIS - BASE CSS
+   Estilos globais e fundamentais
    ============================================ */
 
-/* Reset e configura��es b�sicas */
+/* === RESET E CONFIGURAÇÕES BÁSICAS === */
 * {
     margin: 0;
     padding: 0;
@@ -14,11 +14,12 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
     color: #333;
-    background: linear-gradient(179deg, rgba(255, 255, 255, 1) 0%, rgb(255, 188, 243) 100%);
+    background: linear-gradient(179deg, #fff 0%, #ffbcf3 100%);
     min-height: 100vh;
+    padding-top: 160px; /* Espaço para header fixo */
 }
 
-/* Tipografia */
+/* === TIPOGRAFIA === */
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     line-height: 1.2;
@@ -28,15 +29,12 @@ h1, h2, h3, h4, h5, h6 {
 h1 { font-size: 2.5rem; }
 h2 { font-size: 2rem; }
 h3 { font-size: 1.5rem; }
-h4 { font-size: 1.25rem; }
-h5 { font-size: 1rem; }
-h6 { font-size: 0.875rem; }
 
 p {
     margin-bottom: 1rem;
 }
 
-/* Links */
+/* === LINKS === */
 a {
     color: #ff2d6f;
     text-decoration: none;
@@ -47,19 +45,23 @@ a:hover {
     color: #d91c5a;
 }
 
-/* Container principal */
+/* === CONTAINER === */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Header */
+/* === HEADER FIXO === */
 header {
-    background: radial-gradient(circle, rgba(139, 21, 56, 1) 0%, rgba(230, 73, 124, 1) 88%, rgba(252, 70, 107, 1) 100%);
-    margin: 0;
-    padding: 15px 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: radial-gradient(circle, #8B1538 0%, #E6497C 88%, #FC466B 100%);
+    padding: 12px 0;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
 }
 
 .topbar {
@@ -72,85 +74,83 @@ header {
 .brand {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
     flex: 1;
     justify-content: center;
 }
 
 .logo img {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
 }
 
 .logo img:hover {
-    transform: scale(1.05) rotate(3deg);
+    transform: scale(1.1);
 }
 
 .brand-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 800;
     color: #000;
-    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3);
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.3);
 }
 
 .brand-left,
 .brand-right {
-    flex: 0 0 150px;
+    flex: 0 0 120px;
 }
 
 .cart-link {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
+    gap: 6px;
+    padding: 8px 16px;
     background-color: #5f2d36;
     color: #fff;
     border-radius: 50px;
     font-weight: 600;
-    text-decoration: none;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .cart-link:hover {
     background-color: #7d3944;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     color: #fff;
 }
 
 .cart-badge {
     background-color: #000;
     color: #fdfdfd;
-    padding: 2px 8px;
+    padding: 2px 6px;
     border-radius: 50%;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
-    min-width: 20px;
+    min-width: 18px;
     text-align: center;
 }
 
-/* Footer */
+/* === FOOTER === */
 footer {
     text-align: center;
-    background: radial-gradient(circle, rgba(139, 21, 56, 1) 0%, rgba(230, 73, 124, 1) 88%, rgba(252, 70, 107, 1) 100%);
-    margin: 0;
-    padding: 30px 20px;
+    background: radial-gradient(circle, #8B1538 0%, #E6497C 88%, #FC466B 100%);
+    padding: 25px 20px;
     margin-top: 60px;
-    border-top: 1px solid #eee;
     color: #000;
     font-weight: 600;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Mensagens flutuantes */
+/* === MENSAGENS FLUTUANTES === */
 #mensagens-flutuantes {
     position: fixed;
-    top: 16px;
+    top: 80px;
     right: 16px;
     z-index: 9999;
     max-width: 320px;
@@ -158,7 +158,7 @@ footer {
 
 .msg-alerta {
     background: #d4edda;
-    color: #030303;
+    color: #155724;
     border: 1px solid #c3e6cb;
     padding: 12px 14px;
     border-radius: 8px;
@@ -192,6 +192,10 @@ footer {
     font-size: 18px;
 }
 
+.msg-texto {
+    flex: 1;
+}
+
 .fechar-msg {
     background: none;
     border: none;
@@ -207,46 +211,15 @@ footer {
     opacity: 1;
 }
 
-/* Bot�es gerais */
-.btn {
-    display: inline-block;
-    padding: 12px 24px;
-    border-radius: 50px;
-    font-weight: 700;
-    text-align: center;
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.btn-primary {
-    background: #ff2d6f;
-    color: #fff;
-}
-
-.btn-primary:hover {
-    background: #d91c5a;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 45, 111, 0.3);
-}
-
-.btn-secondary {
-    background: #f0f0f0;
-    color: #333;
-    border: 1px solid #ddd;
-}
-
-.btn-secondary:hover {
-    background: #e0e0e0;
-    border-color: #999;
-}
-
-/* Responsividade */
+/* === RESPONSIVIDADE === */
 @media (max-width: 768px) {
+    body {
+        padding-top: 180px;
+    }
+
     .topbar {
         flex-direction: column;
-        gap: 15px;
+        gap: 10px;
     }
 
     .brand-left,
@@ -256,11 +229,16 @@ footer {
 
     .brand {
         flex-direction: column;
+        gap: 8px;
     }
 
     .brand-title {
-        font-size: 1.25rem;
-        text-align: center;
+        font-size: 1.1rem;
+    }
+
+    .logo img {
+        width: 45px;
+        height: 45px;
     }
 
     h1 { font-size: 2rem; }
@@ -269,13 +247,12 @@ footer {
 }
 
 @media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
+    body {
+        padding-top: 200px;
     }
 
-    .logo img {
-        width: 50px;
-        height: 50px;
+    .container {
+        padding: 0 15px;
     }
 
     .brand-title {
