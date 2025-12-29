@@ -24,10 +24,10 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "cloudinary_storage",  # Cloudinary antes do staticfiles
     "django.contrib.staticfiles",
-    "cloudinary",  # Cloudinary core
     "whitenoise.runserver_nostatic",
+    "cloudinary_storage",  # Cloudinary DEPOIS do staticfiles (só para media)
+    "cloudinary",  # Cloudinary core
     "loja",
 ]
 
