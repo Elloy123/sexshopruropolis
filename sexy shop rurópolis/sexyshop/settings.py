@@ -24,7 +24,9 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "cloudinary_storage",  # Cloudinary antes do staticfiles
     "django.contrib.staticfiles",
+    "cloudinary",  # Cloudinary core
     "whitenoise.runserver_nostatic",
     "loja",
 ]
@@ -105,9 +107,20 @@ else:
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Media files
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# Cloudinary configuration
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', 'deuf03f9q'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY', '188235861748628'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET', 'Xmvd389HLfph7lc52cLZcPx5Mr0'),
+}
+
+# Media files - Cloudinary para produção, local para desenvolvimento
+if os.environ.get('USE_CLOUDINARY', 'False') == 'True':
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    MEDIA_URL = '/media/'  # Cloudinary gerencia automaticamente
+else:
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
