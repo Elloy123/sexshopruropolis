@@ -69,27 +69,53 @@
 /* === RESPONSIVIDADE === */
 @media (max-width: 768px) {
     .section-categorias-wrapper {
-        top: 100px;
-        padding: 8px 0;
+        top: 130px; /* Ajustado para acompanhar header em coluna */
+        padding: 6px 0;
+    }
+
+    .container-cats-center {
+        padding: 0 10px;
     }
 
     .lista-botoes-cats {
-        gap: 6px;
+        gap: 5px;
+        justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+        padding-bottom: 5px;
+    }
+
+    .lista-botoes-cats::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
     }
 
     .botao-cat {
-        padding: 5px 12px;
+        padding: 6px 14px;
         font-size: 0.75rem;
+        white-space: nowrap;
+        flex-shrink: 0;
     }
 }
 
 @media (max-width: 480px) {
     .section-categorias-wrapper {
-        top: 120px;
+        top: 150px; /* Ajustado para header menor no mobile */
+        padding: 5px 0;
+    }
+
+    .container-cats-center {
+        padding: 0 8px;
+    }
+
+    .lista-botoes-cats {
+        gap: 4px;
     }
 
     .botao-cat {
-        padding: 4px 10px;
+        padding: 5px 12px;
         font-size: 0.7rem;
     }
 }
