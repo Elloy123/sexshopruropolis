@@ -16,7 +16,7 @@ body {
     color: #333;
     background: linear-gradient(179deg, #fff 0%, #ffbcf3 100%);
     min-height: 100vh;
-    padding-top: 160px; /* Espaço para header fixo */
+    padding-top: 125px; /* Header (74px) + Categorias (~51px) */
 }
 
 /* === TIPOGRAFIA === */
@@ -214,7 +214,7 @@ footer {
 /* === RESPONSIVIDADE === */
 @media (max-width: 768px) {
     body {
-        padding-top: 180px;
+        padding-top: 185px; /* Header maior + Categorias */
     }
 
     .topbar {
@@ -248,7 +248,7 @@ footer {
 
 @media (max-width: 480px) {
     body {
-        padding-top: 200px;
+        padding-top: 200px; /* Header + Categorias ainda maior em mobile */
     }
 
     .container {
