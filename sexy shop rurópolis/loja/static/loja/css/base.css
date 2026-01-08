@@ -16,7 +16,7 @@ body {
     color: #333;
     background: linear-gradient(179deg, #fff 0%, #ffbcf3 100%);
     min-height: 100vh;
-    padding-top: 125px; /* Header (74px) + Categorias (~51px) */
+    padding-top: 95px; /* Header menor + Categorias */
 }
 
 /* === TIPOGRAFIA === */
@@ -59,7 +59,7 @@ header {
     left: 0;
     right: 0;
     background: radial-gradient(circle, #8B1538 0%, #E6497C 88%, #FC466B 100%);
-    padding: 12px 0;
+    padding: 6px 0;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
     z-index: 1000;
 }
@@ -80,8 +80,8 @@ header {
 }
 
 .logo img {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -93,7 +93,7 @@ header {
 }
 
 .brand-title {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 800;
     color: #000;
     text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.3);
@@ -214,12 +214,12 @@ footer {
 /* === RESPONSIVIDADE === */
 @media (max-width: 768px) {
     body {
-        padding-top: 185px; /* Header maior + Categorias */
+        padding-top: 140px; /* Header + Categorias ajustado */
     }
 
     .topbar {
         flex-direction: column;
-        gap: 10px;
+        gap: 5px;
     }
 
     .brand-left,
@@ -229,16 +229,16 @@ footer {
 
     .brand {
         flex-direction: column;
-        gap: 8px;
+        gap: 5px;
     }
 
     .brand-title {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     .logo img {
-        width: 45px;
-        height: 45px;
+        width: 35px;
+        height: 35px;
     }
 
     h1 { font-size: 2rem; }
@@ -248,7 +248,7 @@ footer {
 
 @media (max-width: 480px) {
     body {
-        padding-top: 200px; /* Header + Categorias ainda maior em mobile */
+        padding-top: 150px; /* Header + Categorias mobile */
     }
 
     .container {
@@ -256,6 +256,6 @@ footer {
     }
 
     .brand-title {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 }
