@@ -16,7 +16,7 @@ body {
     color: #333;
     background: linear-gradient(179deg, #fff 0%, #ffbcf3 100%);
     min-height: 100vh;
-    padding-top: 95px; /* Header menor + Categorias */
+    padding-top: 155px; /* Header (74px) + Categorias (~81px) */
 }
 
 /* === TIPOGRAFIA === */
@@ -59,7 +59,7 @@ header {
     left: 0;
     right: 0;
     background: radial-gradient(circle, #8B1538 0%, #E6497C 88%, #FC466B 100%);
-    padding: 6px 0;
+    padding: 12px 0;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
     z-index: 1000;
 }
@@ -80,8 +80,8 @@ header {
 }
 
 .logo img {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     object-fit: cover;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -93,10 +93,10 @@ header {
 }
 
 .brand-title {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-weight: 800;
-    color: #000;
-    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    text-shadow: 10px 10px 20px rgba(255, 2, 2, 0.3);
 }
 
 .brand-left,
@@ -109,13 +109,16 @@ header {
     align-items: center;
     gap: 6px;
     padding: 8px 16px;
-    background-color: #5f2d36;
+    background-color: #f368a973;
     color: #fff;
     border-radius: 50px;
     font-weight: 600;
     font-size: 0.9rem;
     transition: all 0.3s ease;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: fit-content;
 }
 
 .cart-link:hover {
@@ -214,12 +217,12 @@ footer {
 /* === RESPONSIVIDADE === */
 @media (max-width: 768px) {
     body {
-        padding-top: 140px; /* Header + Categorias ajustado */
+        padding-top: 185px;
     }
 
     .topbar {
         flex-direction: column;
-        gap: 5px;
+        gap: 10px;
     }
 
     .brand-left,
@@ -229,16 +232,16 @@ footer {
 
     .brand {
         flex-direction: column;
-        gap: 5px;
+        gap: 8px;
     }
 
     .brand-title {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
 
     .logo img {
-        width: 35px;
-        height: 35px;
+        width: 45px;
+        height: 45px;
     }
 
     h1 { font-size: 2rem; }
@@ -248,7 +251,7 @@ footer {
 
 @media (max-width: 480px) {
     body {
-        padding-top: 150px; /* Header + Categorias mobile */
+        padding-top: 210px;
     }
 
     .container {
@@ -256,6 +259,6 @@ footer {
     }
 
     .brand-title {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 }
