@@ -220,6 +220,61 @@
     box-shadow: 0 6px 15px rgba(255, 45, 111, 0.35);
 }
 
+/* === MENSAGEM SEM PRODUTOS === */
+.msg-sem-produtos {
+    background: #fff;
+    padding: 30px;
+    border: 1px dashed #ddd;
+    border-radius: 12px;
+    text-align: center;
+    color: #666;
+}
+
+.msg-sem-produtos p {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.link-ver-todos {
+    color: #ff2d6f;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.link-ver-todos:hover {
+    text-decoration: underline;
+}
+
+/* === LINKS E ELEMENTOS DOS CARDS === */
+.link-img-produto {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.sem-foto-texto {
+    color: #ccc;
+}
+
+.link-titulo-produto {
+    text-decoration: none;
+    color: inherit;
+}
+
+.link-titulo-produto:hover {
+    color: #ff2d6f;
+}
+
+.form-add-cart {
+    flex: 1;
+    display: flex;
+}
+
+/* === PRODUTOS RELACIONADOS === */
+.relacionados-wrapper {
+    margin-top: 60px;
+}
+
 /* === RESPONSIVIDADE === */
 @media (max-width: 992px) {
     .grid-produtos {
