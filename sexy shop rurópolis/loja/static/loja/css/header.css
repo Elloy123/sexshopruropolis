@@ -23,6 +23,31 @@
     text-align: center;
 }
 
+/* === BOTÃO TOGGLE CATEGORIAS (MOBILE) === */
+.btn-toggle-categorias {
+    display: none; /* Oculto no desktop */
+    width: 100%;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.btn-toggle-categorias:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.btn-toggle-categorias.ativo {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
 .lista-botoes-cats {
     display: flex;
     gap: 8px;
@@ -70,52 +95,78 @@
 @media (max-width: 768px) {
     .section-categorias-wrapper {
         top: 100px;
-        padding: 8px 0;
+        padding: 12px 0;
     }
 
     .container-cats-center {
         padding: 0 15px;
     }
 
-    .lista-botoes-cats {
-        gap: 6px;
-        justify-content: flex-start;
-        overflow-x: auto;
-        overflow-y: hidden;
-        flex-wrap: nowrap;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        padding-bottom: 5px;
+    /* Mostrar o botão toggle no mobile */
+    .btn-toggle-categorias {
+        display: block;
+        margin-bottom: 10px;
     }
 
-    .lista-botoes-cats::-webkit-scrollbar {
+    /* Menu de categorias oculto por padrão no mobile */
+    .lista-botoes-cats {
         display: none;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+    }
+
+    /* Menu aberto no mobile */
+    .lista-botoes-cats.aberto {
+        display: flex;
+        max-height: 500px;
+        animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .botao-cat {
-        padding: 5px 12px;
-        font-size: 0.75rem;
-        white-space: nowrap;
-        flex-shrink: 0;
+        width: 100%;
+        padding: 10px 16px;
+        font-size: 0.85rem;
+        text-align: center;
+        border-radius: 8px;
     }
 }
 
 @media (max-width: 480px) {
     .section-categorias-wrapper {
         top: 120px;
-        padding: 6px 0;
+        padding: 10px 0;
     }
 
     .container-cats-center {
         padding: 0 10px;
     }
 
-    .lista-botoes-cats {
-        gap: 5px;
+    .btn-toggle-categorias {
+        font-size: 0.9rem;
+        padding: 9px 14px;
+    }
+
+    .lista-botoes-cats.aberto {
+        gap: 6px;
     }
 
     .botao-cat {
-        padding: 4px 10px;
-        font-size: 0.7rem;
+        padding: 8px 14px;
+        font-size: 0.8rem;
     }
 }

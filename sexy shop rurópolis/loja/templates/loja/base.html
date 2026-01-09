@@ -39,8 +39,13 @@
    <!-- BARRA DE CATEGORIAS (FIXA EM TODAS AS PÁGINAS) -->
     <div class="section-categorias-wrapper">
         <div class="container-cats-center">
+            <!-- Botão Toggle para Mobile -->
+            <button class="btn-toggle-categorias" id="btnToggleCategorias">
+                ☰ Categorias
+            </button>
+
             <!-- Lista de Botões -->
-            <div class="lista-botoes-cats">
+            <div class="lista-botoes-cats" id="listaCategorias">
                 <!-- Botão "Todas" -->
                 <a class="botao-cat" href="/">
                     Todas
@@ -55,6 +60,21 @@
             </div>
         </div>
     </div>
+
+    <!-- Script para Toggle de Categorias Mobile -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btnToggle = document.getElementById('btnToggleCategorias');
+            const listaCategorias = document.getElementById('listaCategorias');
+
+            if (btnToggle && listaCategorias) {
+                btnToggle.addEventListener('click', function() {
+                    listaCategorias.classList.toggle('aberto');
+                    btnToggle.classList.toggle('ativo');
+                });
+            }
+        });
+    </script>
 
     <div id="mensagens-flutuantes">
         {% if messages %}

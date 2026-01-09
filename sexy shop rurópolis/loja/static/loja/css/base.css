@@ -217,7 +217,7 @@ footer {
 /* === RESPONSIVIDADE === */
 @media (max-width: 768px) {
     body {
-        padding-top: 185px;
+        padding-top: 175px; /* Ajustado para menu mobile com botão toggle */
     }
 
     .topbar {
