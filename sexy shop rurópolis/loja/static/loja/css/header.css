@@ -11,7 +11,7 @@
     right: 0;
     width: 100%;
     background: linear-gradient(to bottom, #d64570, #C85A6E);
-    padding: 10px 0;
+    padding: 12px 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     z-index: 999;
 }
@@ -107,7 +107,7 @@
 @media (max-width: 768px) {
     .section-categorias-wrapper {
         top: 100px;
-        padding: 12px 0;
+        padding: 14px 0;
     }
 
     .container-cats-center {
@@ -159,7 +159,7 @@
 @media (max-width: 480px) {
     .section-categorias-wrapper {
         top: 120px;
-        padding: 10px 0;
+        padding: 12px 0;
     }
 
     .container-cats-center {
