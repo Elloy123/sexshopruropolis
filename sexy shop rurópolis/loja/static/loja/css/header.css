@@ -92,8 +92,8 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* === DESKTOP (>768px) - Garante que botão fique escondido === */
-@media (min-width: 769px) {
+/* === DESKTOP (>650px) - Garante que botão fique escondido === */
+@media (min-width: 651px) {
     .btn-toggle-categorias {
         display: none !important;
     }
@@ -103,8 +103,8 @@
     }
 }
 
-/* === TABLET E MOBILE (<=768px) === */
-@media (max-width: 768px) {
+/* === TABLET E MOBILE (<=650px) === */
+@media (max-width: 650px) {
     .section-categorias-wrapper {
         top: 100px;
         padding: 14px 0;

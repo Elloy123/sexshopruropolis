@@ -179,7 +179,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 650px) {
     .produto-wrapper {
         grid-template-columns: 1fr;
         gap: 30px;

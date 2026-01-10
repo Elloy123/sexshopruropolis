@@ -95,7 +95,7 @@
 }
 
 /* === RESPONSIVIDADE === */
-@media (max-width: 768px) {
+@media (max-width: 650px) {
     .hero {
         padding: 35px 20px;
     }

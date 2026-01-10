@@ -126,7 +126,7 @@ header {
 }
 
 /* Responsividade do carrinho */
-@media (max-width: 768px) {
+@media (max-width: 650px) {
     .cart-link {
         font-size: 0.82rem;
         padding: 8px 12px;
@@ -228,7 +228,7 @@ footer {
 }
 
 /* === RESPONSIVIDADE === */
-@media (max-width: 768px) {
+@media (max-width: 650px) {
     body {
         padding-top: 165px; /* Ajustado para menu mobile com botão toggle */
     }

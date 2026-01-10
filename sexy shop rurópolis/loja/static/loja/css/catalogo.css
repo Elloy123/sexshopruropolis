@@ -283,7 +283,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 650px) {
     .catalogo-wrapper {
         padding: 20px 16px;
     }
