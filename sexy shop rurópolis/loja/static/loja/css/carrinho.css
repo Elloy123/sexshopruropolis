@@ -404,7 +404,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 650px) {
     .carrinho-layout {
         grid-template-columns: 1fr;
     }
