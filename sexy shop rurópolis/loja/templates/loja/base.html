@@ -39,9 +39,18 @@
     </div>
   </header>
 
-  <nav class="section-categorias-wrapper" aria-label="Categorias">
+  <!-- Substitua a seção de categorias por esta versão: -->
+
+<nav class="section-categorias-wrapper" aria-label="Categorias">
     <div class="container-cats-center">
-      <div class="lista-botoes-cats">
+      <!-- BOTÃO TOGGLE (apenas mobile) -->
+      <button class="toggle-categorias" id="btnToggleCats" aria-label="Abrir categorias">
+        <span class="toggle-text">Categorias</span>
+        <span class="toggle-icon">▼</span>
+      </button>
+
+      <!-- LISTA DE CATEGORIAS -->
+      <div class="lista-botoes-cats" id="listaCategorias">
         <a class="botao-cat" href="/">Todas</a>
 
         {% for c in categorias_globais %}
@@ -53,8 +62,28 @@
     </div>
   </nav>
 </div>
+<script>
+  // Toggle de categorias no mobile
+  document.addEventListener('DOMContentLoaded', function() {
+    const btnToggle = document.getElementById('btnToggleCats');
+    const listaCats = document.getElementById('listaCategorias');
+    
+    if (btnToggle && listaCats) {
+      btnToggle.addEventListener('click', function() {
+        // Alterna a classe 'aberto' na lista
+        listaCats.classList.toggle('aberto');
+        
+        // Alterna a classe 'ativo' no botão (para girar a seta)
+        btnToggle.classList.toggle('ativo');
+      });
+    }
+  });
+</script>
 <style>
-  
+  body{
+    padding-top: 0px;
+ 
+  }
 
 .site-chrome{
   position: sticky;
@@ -148,65 +177,44 @@
 }
 -->
 /* ========= CATEGORIAS ========= */
-.section-categorias-wrapper{
-  background: linear-gradient(to bottom, #d64570, #C85A6E);
-  padding: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  border-top: 1px solid rgba(255,255,255,0.15);
-}
-
-.container-cats-center{
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 12px;
-  text-align: center;
-}
-
-/* Desktop: pode quebrar linhas */
-.lista-botoes-cats{
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Botões */
-.botao-cat{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px 14px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px);
+.toggle-categorias {
+  display: none !important; /* escondido no desktop */
+  width: 28%;
+  padding: 5px 12px;
+  background: rgba(255,255,255,0.2);
   border: 1px solid rgba(255,255,255,0.3);
-  text-decoration: none;
+  border-radius: 8px;
   color: #fff;
-  font-size: .8rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  transition: all .3s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  text-transform: capitalize;
-  letter-spacing: .3px;
-  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 10px;
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.botao-cat:hover{
-  background: rgba(255,255,255,0.25);
-  border-color: rgba(255,255,255,0.5);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+
+.toggle-categorias:hover {
+  background: rgba(255,255,255,0.3);
 }
-.botao-cat.ativo{
-  background: #fff;
-  border-color: #fff;
-  color: #8B1538;
+
+.toggle-icon {
+  transition: transform 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.toggle-categorias.ativo .toggle-icon {
+  transform: rotate(180deg);
 }
 
 
   /* ===== HEADER MAIS BAIXO NO MOBILE ===== */
 @media (max-width: 768px){
-
+    body {
+        padding-top: 0px;
+    }
   .site-header{
     padding: 0px !important;
     margin: 0;        
@@ -263,17 +271,57 @@
     flex-wrap: wrap;
     gap: 15px;
 }
+  .section-categorias-wrapper {
+  padding: 5px;}
+.toggle-categorias {
+    display: flex !important;
+    margin-bottom: 0px;
+  }
+  
+  .lista-botoes-cats {
+    display: none; /* escondido por padrão */
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 0;
+  }
+  
+  .lista-botoes-cats.aberto {
+    display: flex !important;
+    animation: slideDown 0.3s ease;
+  }
+  
+  .botao-cat {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
     .grid-produtos {
               padding: 10px;
 }
-}
+
 
 /* ultra compacto em telas bem pequenas */
 @media (max-width: 480px){
-  .site-header{ padding: 3px 0 !important; }
-  .logo img{ width: 26px !important; height: 26px !important; }
-  .brand-title{ font-size: 0.88rem !important; }
-}
+      body {
+        padding-top: 0px;
+        width: 100%;
+    }
+  .botao-cat{font-size: 0.1rem;
+    
+
+ 
+}}
 
 
 
@@ -304,34 +352,12 @@
   order: 2 !important;
 }
 
-/* (opcional) se algum CSS antigo colocou margin/padding estranho */
-.section-categorias-wrapper{
-  margin: 0 !important;
-}
-/* ===== REMOVE ESPAÇO BRANCO ACIMA DO HEADER (resíduo do fixed) ===== */
-html, body{
-  margin: 0 !important;
-  padding: 0 !important;
-}
 
-body{
-  padding: 0 !important;   /* se antes você tinha padding-top pra compensar header fixo */
-}
 
-.site-chrome{
-  margin-top: 0 !important;
-}
 
-/* alguns temas colocam margem no main/primeira section */
-main{
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
 
-/* se algum container global estiver empurrando */
-.container, .container-fluid{
-  margin-top: 0 !important;
-}
+
+
 
 
 </style>
