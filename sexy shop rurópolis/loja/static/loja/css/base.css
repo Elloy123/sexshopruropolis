@@ -104,11 +104,15 @@ header {
     flex: 0 0 120px;
 }
 
+.brand-right {
+    text-align: right;
+}
+
 .cart-link {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 8px 16px;
+    padding: 8px 14px;
     background-color: #f368a973;
     color: #fff;
     border-radius: 50px;
@@ -119,6 +123,15 @@ header {
     white-space: nowrap;
     flex-shrink: 0;
     min-width: fit-content;
+}
+
+/* Responsividade do carrinho */
+@media (max-width: 768px) {
+    .cart-link {
+        font-size: 0.82rem;
+        padding: 8px 12px;
+        margin: 6px;
+    }
 }
 
 .cart-link:hover {
