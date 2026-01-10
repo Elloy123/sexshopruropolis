@@ -45,7 +45,7 @@
             </form>
 
             <!-- Botão Comprar (WhatsApp) -->
-            <a href="https://wa.me/5593992434424?text=Olá! Quero comprar: {{ p.nome }} (R$ {{ p.preco }})" target="_blank" class="btn-grandao btn-compra">
+            <a href="https://wa.me/5593992434424?text=Olá! Quero comprar: {{ produto.nome }} (R$ {{ produto.preco }})" target="_blank" class="btn-grandao btn-compra">
                 Comprar Agora
             </a>
         </div>
@@ -99,7 +99,7 @@
                             {% csrf_token %}
                         <input type="hidden" name="next" value="{{ request.get_full_path }}">
                         <button type="submit" class="btn-grandao btn-sacola">
-                             Adicionar à Sacola
+                             Adicionar ao carrinho 
                          </button>
                         </form>
 

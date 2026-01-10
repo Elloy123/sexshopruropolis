@@ -16,7 +16,7 @@ body {
     color: #333;
     background: linear-gradient(179deg, #fff 0%, #ffbcf3 100%);
     min-height: 100vh;
-    padding-top: 160px; /* Espaço para header fixo */
+    padding-top: 130px; /* Header (74px) + Categorias (~56px) */
 }
 
 /* === TIPOGRAFIA === */
@@ -95,8 +95,8 @@ header {
 .brand-title {
     font-size: 1.3rem;
     font-weight: 800;
-    color: #000;
-    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    text-shadow: 10px 10px 20px rgba(255, 2, 2, 0.3);
 }
 
 .brand-left,
@@ -104,18 +104,34 @@ header {
     flex: 0 0 120px;
 }
 
+.brand-right {
+    text-align: right;
+}
+
 .cart-link {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 8px 16px;
-    background-color: #5f2d36;
+    padding: 8px 14px;
+    background-color: #f368a973;
     color: #fff;
     border-radius: 50px;
     font-weight: 600;
     font-size: 0.9rem;
     transition: all 0.3s ease;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: fit-content;
+}
+
+/* Responsividade do carrinho */
+@media (max-width: 650px) {
+    .cart-link {
+        font-size: 0.82rem;
+        padding: 8px 12px;
+        margin: 6px;
+    }
 }
 
 .cart-link:hover {
@@ -212,9 +228,9 @@ footer {
 }
 
 /* === RESPONSIVIDADE === */
-@media (max-width: 768px) {
+@media (max-width: 650px) {
     body {
-        padding-top: 180px;
+        padding-top: 165px; /* Ajustado para menu mobile com botão toggle */
     }
 
     .topbar {
@@ -248,7 +264,7 @@ footer {
 
 @media (max-width: 480px) {
     body {
-        padding-top: 200px;
+        padding-top: 185px;
     }
 
     .container {
