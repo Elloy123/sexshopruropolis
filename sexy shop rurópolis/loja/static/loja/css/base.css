@@ -66,17 +66,19 @@ header {
 
 .topbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+    position: relative;
     gap: 20px;
 }
 
 .brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     gap: 12px;
-    flex: 1;
-    justify-content: center;
 }
 
 .logo img {
@@ -99,9 +101,12 @@ header {
     text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.3);
 }
 
-.brand-left,
+.brand-left {
+    display: none;
+}
+
 .brand-right {
-    flex: 0 0 120px;
+    flex: 0 0 auto;
 }
 
 .cart-link {
