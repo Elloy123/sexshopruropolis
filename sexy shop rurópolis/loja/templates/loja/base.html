@@ -8,73 +8,334 @@
 
     <!-- Importa todos os CSS globais -->
    <link rel="stylesheet" href="{% static 'loja/css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'loja/css/header.css' %}">
-    <link rel="stylesheet" href="{% static 'loja/css/home.css' %}">
-    <link rel="stylesheet" href="{% static 'loja/css/catalogo.css' %}">
+     <link rel="stylesheet" href="{% static 'loja/css/header.css' %}">
+    
+    
 
-
+    
     <!-- Bloco para CSS específico de cada página (opcional) -->
     {% block extra_css %}{% endblock %}
 </head>
 <body>
     <!-- CABEÇALHO (Aparece em todas as páginas) -->
-    <header>
-      <div class="container topbar">
-        <div class="brand-left"></div>
-        <div class="brand">
-          <div class="logo">
-            <a href="{% url 'home' %}">
-                <img src="{% static 'loja/img/logo.jpeg.jpeg' %}" alt="Sexy Shop Rurópolis">
-            </a>
-          </div>
-          <h1 class="brand-title">Sexy Shop Rurópolis</h1>
-        </div>
-        <div class="brand-right">
-          <a class="cart-link" href="/carrinho/">
-            🛒 Carrinho <span class="cart-badge">{{ carrinho_qtd|default:"0" }}</span>
+   <!-- TOPO STICKY (HEADER + CATEGORIAS) -->
+<div class="site-chrome">
+  <header class="site-header">
+    <div class="container topbar">
+           <div class="brand">
+        <div class="logo">
+          <a href="{% url 'home' %}">
+            <img src="{% static 'loja/img/logo.jpeg.jpeg' %}" alt="Sexy Shop Rurópolis">
           </a>
         </div>
+        <h1 class="brand-title">Sexy Shop Rurópolis</h1>
       </div>
-    </header>
-   <!-- BARRA DE CATEGORIAS (FIXA EM TODAS AS PÁGINAS) -->
-    <div class="section-categorias-wrapper">
-        <div class="container-cats-center">
-            <!-- Botão Toggle para Mobile -->
-            <button class="btn-toggle-categorias" id="btnToggleCategorias">
-                ☰ Categorias
-            </button>
 
-            <!-- Lista de Botões -->
-            <div class="lista-botoes-cats" id="listaCategorias">
-                <!-- Botão "Todas" -->
-                <a class="botao-cat" href="/">
-                    Todas
-                </a>
-
-                <!-- Loop das Categorias -->
-                {% for c in categorias_globais %}
-                    <a class="botao-cat" href="/?cat={{ c.slug }}">
-                        {{ c.nome }}
-                    </a>
-                {% endfor %}
-            </div>
-        </div>
+      <div class="brand-right">
+        <a class="cart-link" href="/carrinho/">
+          🛒 Carrinho <span class="cart-badge">{{ carrinho_qtd|default:"0" }}</span>
+        </a>
+      </div>
     </div>
+  </header>
 
-    <!-- Script para Toggle de Categorias Mobile -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const btnToggle = document.getElementById('btnToggleCategorias');
-            const listaCategorias = document.getElementById('listaCategorias');
+  <nav class="section-categorias-wrapper" aria-label="Categorias">
+    <div class="container-cats-center">
+      <div class="lista-botoes-cats">
+        <a class="botao-cat" href="/">Todas</a>
 
-            if (btnToggle && listaCategorias) {
-                btnToggle.addEventListener('click', function() {
-                    listaCategorias.classList.toggle('aberto');
-                    btnToggle.classList.toggle('ativo');
-                });
-            }
-        });
-    </script>
+        {% for c in categorias_globais %}
+          <a class="botao-cat" href="/?cat={{ c.slug }}">
+            {{ c.nome }}
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </nav>
+</div>
+<style>
+  
+
+.site-chrome{
+  position: sticky;
+  margin: 0px;
+  padding: 0px;
+  top: 0;
+  z-index: 1000;
+}
+
+/* ========= HEADER ========= */
+.site-header{
+  background: radial-gradient(circle, #8B1538 0%, #E6497C 88%, #FC466B 100%);
+  padding: 0;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+}
+
+/* Topbar flexível */
+.topbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0px;
+  flex-wrap: wrap; /* quebra no mobile */
+}
+
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  flex: 1 1 280px;
+  justify-content: center;
+  min-width: 220px;
+}
+
+.logo img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: transform .3s ease;
+}
+.logo img:hover{ transform: scale(1.07); }
+
+.brand-title{
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  text-align: center;
+  text-shadow: 10px 10px 20px rgba(255, 2, 2, 0.3);
+}
+
+.brand-left,
+.brand-right{
+  flex: 0 0 auto;
+}
+
+.cart-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background-color: #f368a973;
+  color: #fff;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: .9rem;
+  transition: all .3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.cart-link:hover{
+  background-color: #7d3944;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  color: #fff;
+}
+.cart-badge{
+  background-color: #000;
+  color: #fdfdfd;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-size: .7rem;
+  font-weight: 700;
+  min-width: 18px;
+  text-align: center;
+}
+-->
+/* ========= CATEGORIAS ========= */
+.section-categorias-wrapper{
+  background: linear-gradient(to bottom, #d64570, #C85A6E);
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.container-cats-center{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 12px;
+  text-align: center;
+}
+
+/* Desktop: pode quebrar linhas */
+.lista-botoes-cats{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Botões */
+.botao-cat{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  text-decoration: none;
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 600;
+  transition: all .3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-transform: capitalize;
+  letter-spacing: .3px;
+  white-space: nowrap;
+}
+.botao-cat:hover{
+  background: rgba(255,255,255,0.25);
+  border-color: rgba(255,255,255,0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.botao-cat.ativo{
+  background: #fff;
+  border-color: #fff;
+  color: #8B1538;
+}
+
+
+  /* ===== HEADER MAIS BAIXO NO MOBILE ===== */
+@media (max-width: 768px){
+
+  .site-header{
+    padding: 0px !important;
+    margin: 0;        
+  }
+
+ .container, .container-fluid {
+    margin-top: 0 !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+}
+
+      .brand {
+        display: flex;
+        flex-direction: column;
+        padding-top: 0px;
+        align-items: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .brand-left, .brand-right {
+        margin-left: auto;
+    }
+
+
+  .logo img{
+    width: 30px !important;
+    height: 30px !important;
+    }
+  
+
+  .brand-title{
+    font-size: 0.95rem !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    white-space: nowrap !important;       /* não quebra linha */
+    overflow: hidden !important;          /* corta excesso */
+    text-overflow: ellipsis !important;   /* "..." */
+  }
+
+  .cart-link{
+        padding: 10px !important;
+        font-size: 0.82rem !important;
+        margin-bottom: 6px;
+  }
+  .catalogo-header {
+    display: flex;
+    padding: 5px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+    .grid-produtos {
+              padding: 10px;
+}
+}
+
+/* ultra compacto em telas bem pequenas */
+@media (max-width: 480px){
+  .site-header{ padding: 3px 0 !important; }
+  .logo img{ width: 26px !important; height: 26px !important; }
+  .brand-title{ font-size: 0.88rem !important; }
+}
+
+
+
+/* ====== FORÇA ORDEM: HEADER EM CIMA, CATEGORIAS EMBAIXO ====== */
+.site-chrome{
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Garante que o header não esteja fixed por CSS antigo */
+.site-header{
+  position: static !important;
+  order: 1 !important;
+}
+
+/* AQUI está o principal:
+   se o seu header.css antigo ainda tiver position: fixed na barra, isso corrige */
+.section-categorias-wrapper{
+  position: static !important;  /* anula fixed */
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+
+  order: 2 !important;
+}
+
+/* (opcional) se algum CSS antigo colocou margin/padding estranho */
+.section-categorias-wrapper{
+  margin: 0 !important;
+}
+/* ===== REMOVE ESPAÇO BRANCO ACIMA DO HEADER (resíduo do fixed) ===== */
+html, body{
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body{
+  padding: 0 !important;   /* se antes você tinha padding-top pra compensar header fixo */
+}
+
+.site-chrome{
+  margin-top: 0 !important;
+}
+
+/* alguns temas colocam margem no main/primeira section */
+main{
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* se algum container global estiver empurrando */
+.container, .container-fluid{
+  margin-top: 0 !important;
+}
+
+
+</style>
+
 
     <div id="mensagens-flutuantes">
         {% if messages %}
