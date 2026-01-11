@@ -80,10 +80,17 @@
   });
 </script>
 <style>
-  body{
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
     padding-top: 0px;
- 
-  }
+    position: relative;
+}
+
+* {
+    box-sizing: border-box;
+}
+  
 
 .site-chrome{
   position: sticky;
@@ -312,6 +319,7 @@
               padding: 10px;
 }
 
+    
 
 /* ultra compacto em telas bem pequenas */
 @media (max-width: 480px){
@@ -319,9 +327,10 @@
         padding-top: 0px;
         width: 100%;
     }
-  .botao-cat{font-size: 10.3px;    
+  .botao-cat{font-size: 10.3px;  
+}
  
-}}
+}
 
 
 
