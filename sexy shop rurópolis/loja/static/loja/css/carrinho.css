@@ -220,6 +220,7 @@ body {
 .carrinho-footer {
     margin-top: 20px;
     display: flex;
+    padding: 0px 10px;
     justify-content: space-between;
     align-items: center;
 }
@@ -414,6 +415,10 @@ body {
         position: static !important;
         margin-top: 20px;
     }
+    .carrinho-footer {
+        padding: 0px 15px !important;
+        margin-top: 15px;
+    }
 
     /* Tabela responsiva com scroll horizontal */
     .itens-carrinho {
@@ -446,8 +451,8 @@ body {
 @media (max-width: 480px){
     
     .carrinho-container {
-        margin: 20px auto !important;
-        padding: 10px !important;
+        margin: 0px auto !important;
+        padding: 0px !important;
     }
 
     .carrinho-titulo {
@@ -482,10 +487,11 @@ body {
 
     /* Footer do carrinho */
     .carrinho-footer {
+        padding: 0px 10px !important;
         flex-direction: column;
         gap: 10px;
         align-items: flex-start;
-        padding: 0px 15px;
+    
     }
 
     .total-carrinho {
@@ -495,7 +501,4 @@ body {
     .total-valor {
         font-size: 20px;
     }
-    .link-limpar{
-    padding-right: 15px;
-}
 }
